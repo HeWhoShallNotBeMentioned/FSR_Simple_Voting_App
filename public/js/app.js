@@ -5,16 +5,13 @@ class ProductList extends React.Component {
     this.state = {
       products: [],
     };
-
-    this.handleProductUpVote = this.handleProductUpVote.bind(this);
-    this.handleProductDownVote = this.handleProductDownVote.bind(this);
   }
 
   componentDidMount() {
     this.setState({ products: Seed.products });
   }
 
-  handleProductUpVote(productId) {
+  handleProductUpVote = productId => {
     const nextProducts = this.state.products.map(product => {
       if (product.id === productId) {
         return Object.assign({}, product, {
@@ -27,9 +24,9 @@ class ProductList extends React.Component {
     this.setState({
       products: nextProducts,
     });
-  }
+  };
 
-  handleProductDownVote(productId) {
+  handleProductDownVote = productId => {
     const nextProducts = this.state.products.map(product => {
       if (product.id === productId) {
         return Object.assign({}, product, {
@@ -42,7 +39,7 @@ class ProductList extends React.Component {
     this.setState({
       products: nextProducts,
     });
-  }
+  };
 
   render() {
     const products = this.state.products.sort((a, b) => b.votes - a.votes);
@@ -67,17 +64,14 @@ class ProductList extends React.Component {
 class Product extends React.Component {
   constructor(props) {
     super(props);
-
-    this.handleUpVote = this.handleUpVote.bind(this);
-    this.handleDownVote = this.handleDownVote.bind(this);
   }
 
-  handleUpVote() {
+  handleUpVote = () => {
     this.props.onUpVote(this.props.id);
-  }
-  handleDownVote() {
+  };
+  handleDownVote = () => {
     this.props.onDownVote(this.props.id);
-  }
+  };
 
   render() {
     return (
